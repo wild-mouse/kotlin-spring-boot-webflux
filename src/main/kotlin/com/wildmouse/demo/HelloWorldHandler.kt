@@ -12,4 +12,10 @@ import reactor.core.publisher.Mono
 class HelloWorldHandler {
     fun helloWorld(request: ServerRequest): Mono<ServerResponse> =
             ok().body(Flux.just("Hello, World!"))
+
+    fun postSomething(request: ServerRequest): Mono<ServerResponse> =
+            ok().build()
+
+    fun putSomething(reqeust: ServerRequest): Mono<ServerResponse> =
+            ok().build()
 }
