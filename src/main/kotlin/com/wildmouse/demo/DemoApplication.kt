@@ -2,19 +2,21 @@ package com.wildmouse.demo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RestController
-import reactor.core.publisher.Mono
+import org.springframework.context.annotation.Bean
+import org.springframework.web.reactive.function.server.*
+import reactor.core.publisher.Flux
 
 @SpringBootApplication
-class DemoApplication
+class DemoApplication {
+    @Bean
+    fun routes(): RouterFunction<ServerResponse> {
+        return RouterFunctions.route(
+                RequestPredicates.GET("/"),
+                HandlerFunction { _ -> ServerResponse.ok().body(Flux.just("Hello, World!")) }
+        )
+    }
+}
 
 fun main(args: Array<String>) {
     runApplication<DemoApplication>(*args)
-}
-
-@RestController
-class HelloWorldController {
-    @GetMapping("/")
-    fun helloWorld(): Mono<String> = Mono.just("Hello, World")
 }
