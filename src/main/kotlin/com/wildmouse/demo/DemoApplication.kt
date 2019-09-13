@@ -13,7 +13,6 @@ class DemoApplication {
         return route()
                 .GET("/", helloWorldHandler::helloWorld)
                 .build()
-//        )
     }
 }
 
