@@ -12,7 +12,7 @@ class RouteConfig {
     fun routes(taskHandler: TaskHandler): RouterFunction<ServerResponse> {
         return RouterFunctions.route()
                 .GET("/{id}", taskHandler::getTaskById)
-//                .POST("/", taskHandler::postSomething)
+                .POST("/", taskHandler::postTask)
 //                .PUT("/", taskHandler::putSomething)
                 .build()
     }

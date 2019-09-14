@@ -1,5 +1,6 @@
 package com.wildmouse.demo
 
+import com.wildmouse.demo.model.Task
 import com.wildmouse.demo.repository.TaskRepository
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
@@ -18,9 +19,11 @@ class TaskHandler(
                     .flatMap { ok().body(BodyInserters.fromObject(it)) }
                     .switchIfEmpty(notFound().build())
 
-//    fun postSomething(request: ServerRequest): Mono<ServerResponse> =
-//            ok().build()
-//
+    fun postTask(request: ServerRequest): Mono<ServerResponse> =
+            request.bodyToMono(Task::class.java)
+                    .flatMap { taskRepository.save(it) }
+                    .flatMap { ok().body(BodyInserters.fromObject(it)) }
+
 //    fun putSomething(reqeust: ServerRequest): Mono<ServerResponse> =
 //            ok().build()
 }
