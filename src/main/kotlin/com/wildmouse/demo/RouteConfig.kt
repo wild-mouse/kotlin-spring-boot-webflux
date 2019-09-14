@@ -9,11 +9,20 @@ import org.springframework.web.reactive.function.server.ServerResponse
 @Configuration
 class RouteConfig {
     @Bean
-    fun routes(helloWorldHandler: HelloWorldHandler): RouterFunction<ServerResponse> {
+    fun routes(taskHandler: TaskHandler): RouterFunction<ServerResponse> {
         return RouterFunctions.route()
-                .GET("/", helloWorldHandler::helloWorld)
-                .POST("/", helloWorldHandler::postSomething)
-                .PUT("/", helloWorldHandler::putSomething)
+                .GET("/{id}", taskHandler::getTaskById)
+//                .POST("/", taskHandler::postSomething)
+//                .PUT("/", taskHandler::putSomething)
                 .build()
     }
+
+//    @Bean
+//    fun routes(helloWorldHandler: HelloWorldHandler): RouterFunction<ServerResponse> {
+//        return RouterFunctions.route()
+//                .GET("/", helloWorldHandler::helloWorld)
+//                .POST("/", helloWorldHandler::postSomething)
+//                .PUT("/", helloWorldHandler::putSomething)
+//                .build()
+//    }
 }
