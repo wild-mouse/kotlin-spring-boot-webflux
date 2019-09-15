@@ -11,6 +11,7 @@ class RouteConfig {
     @Bean
     fun routes(taskHandler: TaskHandler): RouterFunction<ServerResponse> {
         return RouterFunctions.route()
+                .GET("/", taskHandler::getTasks)
                 .GET("/{id}", taskHandler::getTaskById)
                 .POST("/", taskHandler::postTask)
 //                .PUT("/", taskHandler::putSomething)
